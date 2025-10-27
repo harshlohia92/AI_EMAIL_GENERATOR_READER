@@ -1,7 +1,0 @@
-fastapi[standard]
-uvicorn
-crewai
-google-auth
-google-auth-oauthlib
-google-api-python-client
-python-dotenv
