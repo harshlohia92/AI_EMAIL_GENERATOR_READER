@@ -9,7 +9,7 @@ llm = LLM(
     model="gemini/gemini-2.0-flash",
     temperature=0.5
 )
-# === Define the AI Agent ===
+
 email_agent = Agent(
     role="AI EMAIL MANAGER",
     goal="Write and analyze emails using Gmail. Maintain professionalism and efficiency.",
@@ -21,9 +21,7 @@ email_agent = Agent(
     llm=llm,
 )
 
-# === Define Tasks ===
 
-# 1️⃣ Write Email Task
 write_task = Task(
     name="write_task",
     description="Write a professional email to {recipient} about {purpose}. Keep tone polite, concise, and formal.",
@@ -31,7 +29,7 @@ write_task = Task(
     agent=email_agent,
 )
 
-# 2️⃣ Read Inbox Task
+
 read_task = Task(
     name="read_task",
     description="Fetch the latest 5 unread emails from Gmail inbox and summarize them clearly.",
@@ -39,7 +37,7 @@ read_task = Task(
     agent=email_agent,
 )
 
-# 3️⃣ Spam Detection Task
+
 spam_task = Task(
     name="spam_task",
     description="Analyze unread emails and classify each as spam or not spam based on the content.",
@@ -47,7 +45,7 @@ spam_task = Task(
     agent=email_agent,
 )
 
-# 4️⃣ Auto Reply Task
+
 auto_reply_task = Task(
     name="auto_reply_task",
     description=(
@@ -58,7 +56,7 @@ auto_reply_task = Task(
     agent=email_agent,
 )
 
-# 5️⃣ Priority Detection Task
+
 priority_task = Task(
     name="priority_task",
     description=(
@@ -69,7 +67,7 @@ priority_task = Task(
     agent=email_agent,
 )
 
-# === Assemble Crew ===
+
 crew = Crew(
     agents=[email_agent],
     tasks=[write_task, read_task, spam_task, auto_reply_task, priority_task],
@@ -77,7 +75,7 @@ crew = Crew(
 )
 
 
-# === Runner Function ===
+
 def run_email_crew(inputs):
     print("🚀 Starting AI Email Crew...\n")
     result = crew.kickoff(inputs=inputs)
@@ -89,7 +87,7 @@ def run_email_crew(inputs):
         output_value = getattr(task_output, "output", None) or getattr(task_output, "result", None) or str(task_output)
         print(f"📝 Output: {output_value}")
 
-    # 📬 Fetch and display inbox summary
+
     print("\n📨 Fetching Inbox Summary...")
     inbox = read_emails()
     if inbox:
